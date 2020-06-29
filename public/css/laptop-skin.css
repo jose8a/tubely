@@ -1,0 +1,25 @@
+  /**************************************************
+   * skin properties
+   */
+@media screen and (min-width: 900px) {
+  body {
+    font-size: 1.8;
+  }
+
+  label {
+    font-size: 1.8rem;
+  }
+
+  .btn-playlist {
+    font-size: 1.8rem;
+  }
+
+  #settings {
+    cursor: pointer;
+    color: var(--accent-color-lite);
+    background-color: var(--grey-color-dark);
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+  }
+}
+

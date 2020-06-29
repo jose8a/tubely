@@ -1,0 +1,71 @@
+  /**************************************************
+   * spacing properties
+   */
+@media screen and (min-width: 900px) {
+  body {
+    width: 80vw;
+    max-width: 900px;
+    margin: 0 auto;
+    /*
+    padding-left: 5vw;
+    padding-right: 5vw;
+    */
+  }
+
+  /*
+  #player {
+  }
+
+  #controls {
+    box-shadow:
+      22vw 5vh 0 3vw hsla(200, 10%, 10%, 0.8),
+      -22vw -5vh 0 3vw hsla(200, 10%, 10%, 0.8);
+  }
+
+  #list-size-options {
+    padding: 1rem 1.5rem 1rem 0.5rem;
+  }
+
+  #numSongs-title {
+    margin: 0.25rem 0 0.75rem 0;
+  }
+
+  #chartSelects {
+    margin-top: 0;
+  }
+  */
+
+  input[type='radio'] {
+    height: 1.5rem;
+    width: 2rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+
+  label {
+    width: calc(100% - 4rem);
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  #in-custom {
+    width: 5rem;
+    margin: 0.5rem 0.25rem 0.5rem 0;
+  }
+
+  .btn-playlist {
+    height: calc((35vw / 7) - 6px);
+    width: 100%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  #settings {
+    height: 4rem;
+    width: calc(19% - 1px);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+}
+

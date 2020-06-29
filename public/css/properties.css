@@ -1,0 +1,67 @@
+
+  /**************************************************
+   * custom-properties definitions
+   * */
+
+  /* default properties: mobile-layout*/
+  :root {
+    /* app theme colors */
+    --primary-color-darker: hsla(200, 70%, 10%, 0.8);
+    --primary-color-dark: hsla(200, 90%, 10%, 0.8);
+    --primary-color-med: hsla(200, 40%, 50%, 0.8);
+    --primary-color-light: hsla(200, 70%, 90%, 0.8);
+    --accent-color-lite: hsla(100, 70%, 90%, 0.95);
+    --accent-color-med: hsla(100, 40%, 40%, 0.80);
+    --accent-color-dark: hsla(140, 10%, 20%, 0.2);
+    --grey-color-darkest: hsla(200, 10%, 2%, 0.9);
+    --grey-color-dark: hsla(200, 10%, 5%, 0.8);
+    --grey-color-med: hsla(200, 10%, 10%, 0.8);
+
+    /* player animation variables */
+    --slide-player-up: -10vh;
+    --slide-player-down: 10vh;
+
+
+    /* #player-status grid properties */
+    --status-col-start: 8;
+    --status-col-width: span 10;
+    --status-row-start: 3;
+    --status-row-stack: span 3;
+
+    /* #controls grid properties */
+    --controls-col-start: 2;
+    --controls-col-width: span 10;
+    --controls-row-start: 5;
+    --controls-row-stack: span 20;
+
+    /* #list-size-options grid properties */
+    --options-col-start: 6;
+    --options-col-width: span 4;
+    --options-row-start: 1;
+    --options-row-stack: span 8;
+
+    /* #chartSelects grid properties */
+    --charts-col-start: 2;
+    --charts-col-start: 1;
+    --charts-col-width: span 8;
+    --charts-col-width: span 10;
+    --charts-row-start: 10;
+    --charts-row-start: 12;
+    --charts-row-stack: span 10;
+    --charts-row-stack: span 8;
+
+    /* #player-wrapper grid properties */
+    --player-col-start: 3;
+    --player-col-start: 1;
+    --player-col-width: span 8;
+    --player-col-width: span 12;
+    --player-row-start: 3;
+    --player-row-stack: span 10;
+    --player-row-stack: span 9;
+
+    /* ------------------------------ */
+
+  }
+
+
+

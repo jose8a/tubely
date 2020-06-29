@@ -1,0 +1,89 @@
+  /**************************************************
+   * spacing properties
+   */
+  :root {
+    --radio-width: 3rem;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+  }
+
+  /*
+  #chartSelects {
+    margin-top: 2vh;
+  }
+  */
+
+  #list-size-options {
+    padding-right: 2rem;
+  }
+
+  #numSongs-title {
+    width: 100%;
+    padding: 0.5rem 2rem;
+    text-align: right;
+  }
+
+  input[type='radio'] {
+    flex-grow: 1;
+    height: 1.5rem;
+    width: 1.5rem;
+    padding: 1.25rem 0.5rem;
+
+    margin-bottom: 1rem;
+    margin-bottom: 0;
+    vertical-align: center;
+
+    /* to center the radio in it's track */
+    display: flex;
+    align-items: center;
+
+    border: 1px yellow solid;
+  }
+
+  label {
+    flex-grow: 1;
+    height: 1.5rem;
+    width: calc(100% - 2rem);
+    padding-top: 1.25rem;
+    padding-top: .25rem;
+    padding-bottom: 1.25rem;
+    padding-bottom: .25rem;
+    padding-right: 0.5rem;
+
+    margin-bottom: 1rem;
+    margin-bottom: 0;
+
+    /* center text in track and align it right */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    border: 1px orange solid;
+  }
+
+  input[type='text'] {
+    width: 5rem;
+    height: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .btn-playlist {
+    height: 4.5rem;
+    width: 50%;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .btn-playlist::before {
+    content: "";
+    height: 100%;
+    width: 100%;
+  }
+

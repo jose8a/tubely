@@ -1,0 +1,68 @@
+  /**************************************************
+   * skin-properties
+   * */
+  html {
+    background-color: hsla(0, 5%, 5%, 1);
+  }
+
+  body {
+    background-color: var(--grey-color-darkest);
+    font-size: 1.25rem;
+  }
+
+  #controls {
+    color: var(--accent-color-lite);
+  }
+
+  p,
+  #list-size-options {
+    background-color: var(--grey-color-med);
+  }
+
+  #numSongs-title {
+    font-size: 2.25rem;
+  }
+
+  p {
+    font-size: 1.5rem;
+    color: var(--primary-color-light);
+  }
+
+  #in-custom {
+    font-size: 1.25rem;
+    vertical-align: middle;
+    border-radius: 10px;
+  }
+
+  input[type='text'] {
+    border-radius: 10px;
+  }
+
+  label {
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+  }
+
+  .btn-playlist {
+    font-size: 1.25rem;
+    color: var(--primary-color-light);
+    border: 1px solid var(--primary-color-light);
+    background-color: var(--primary-color-darker);
+  }
+
+  .btn-playlist:hover {
+    cursor: pointer;
+    color: var(--accent-color-lite);
+    transform: scale(1.03);
+    background-color: var(--grey-color-dark);
+  }
+
+  /*#list-size-options::before,
+  p::before,*/
+  .btn-playlist::before {
+    background-color: var(--accent-color-dark);
+  }
+
+  #numSongs-title {
+    background-color: var(--primary-color-dark);
+  }

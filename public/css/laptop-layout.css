@@ -1,0 +1,55 @@
+@media screen and (min-width: 900px) {
+  /**************************************************
+   * layout properties
+   */
+  /*
+  html {
+    z-index: 0;
+  }
+
+  body {
+    position: relative;
+    z-index: 2;
+  }
+
+  #controls,
+  #player {
+    position: absolute;
+    top: 20vh;
+  }
+  */
+
+  /*
+  #controls {
+    left: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  #list-size-options {
+    position: relative;
+    align-items: flex-start;
+    align-content: flex-start;
+  }
+
+  #numSongs-title {
+    position: relative;
+  }
+
+  #chartSelects {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  #settings {
+    position: absolute;
+    bottom: 100%;
+    z-index: 50;
+    transform: translateZ(50px);
+  }
+  */
+}
+

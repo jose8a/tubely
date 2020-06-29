@@ -1,0 +1,29 @@
+@media screen and (min-width: 450px) and (orientation: landscape){
+  /**************************************************
+   * layout properties
+   */
+  #player {
+    position: absolute;
+    top: 5vh;
+  }
+
+  /*
+   * remove underlays from player because they obscure other
+   * elements in this device configuration
+   */
+  #player::before,
+  #player::after {
+    display: none;
+  }
+
+  #controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .btn-playlist {
+    flex-grow: 1;
+  }
+}
+

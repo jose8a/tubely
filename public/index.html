@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+
+    <!-- stylesheets for player -->
+    <link rel="stylesheet" href="./css/properties.css" type="text/css">
+    <link rel="stylesheet" href="./css/animations.css" type="text/css">
+    <link rel="stylesheet" href="./css/background.css" type="text/css">
+    <link rel="stylesheet" href="./css/mobile-portrait-layout.css" type="text/css">
+    <link rel="stylesheet" href="./css/mobile-portrait-skin.css" type="text/css">
+    <link rel="stylesheet" href="./css/mobile-portrait-spacing.css" type="text/css">
+    <link rel="stylesheet" href="./css/laptop-layout.css" type="text/css">
+    <link rel="stylesheet" href="./css/laptop-skin.css" type="text/css">
+    <link rel="stylesheet" href="./css/laptop-spacing.css" type="text/css">
+  </head>
+  <body>
+    <noscript>
+      <strong>
+        We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't
+        work properly without JavaScript enabled. Please enable it to continue.
+      </strong>
+    </noscript>
+    <div class="bg-pattern"></div>
+
+    <!-- Controls for the player will exist in vue component housed here -->
+    <div id="tubely"></div>
+
+    <!--
+      Bootstrap the youtube API and necessary structures to load the youtube
+      embedded <iframe> player.
+    -->
+    <script src="./js/load-player-iframe.js"></script>
+
+    <!-- script type="module">
+      document.addEventListener('yt-api-load', async (e) => {
+        let {
+          bootstrapApi,
+          onYouTubeIframeAPIReady,
+          onPlayerReady,
+          onPlayerStateChange,
+          onError
+        } = await import("./js/player-iframe-module.js");
+
+        let done = false;
+        bootstrapApi();
+        console.log(`Imported 'load-player-iframe' script.`);
+      });
+    </script -->
+
+    <!-- built files will be auto injected -->
+  </body>
+</html>

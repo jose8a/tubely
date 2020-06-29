@@ -1,0 +1,170 @@
+/* @media screen and (max-width: 450px) { */
+  /**************************************************
+   * layout properties
+   */
+  html {
+    touch-action: manipulation;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  body {
+    position: relative;
+    z-index: 0;
+    width: 100vw;
+    max-width: 900px;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /**************************************************
+   * Child-elems of body
+   */
+  #app {
+    position: absolute;;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    padding: 0 1rem;
+    overflow: hidden;
+
+    /* grid setup for child elements*/
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(25, 4vh);
+    grid-gap: 1rem;
+  }
+
+  /**************************************************
+   * Child-elems of app
+   */
+  #player-status {
+    /* location of #player-wrapper w/in #app */
+    grid-column-start: var(--status-col-start);
+    grid-column-end: var(--status-col-width);
+    grid-row-start: var(--status-row-start);
+    grid-row-end: var(--status-row-stack);
+  }
+
+  #controls {
+    /* location of #controls w/in #app */
+    grid-column-start: var(--controls-col-start);
+    grid-column-end: var(--controls-col-width);
+    grid-row-start: var(--controls-row-start);
+    grid-row-end: var(--controls-row-stack);
+
+    /* flex layout for children of controls */
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(20, 4vh);
+    position: relative;
+
+    /* --- */
+  }
+
+  #screen-dims {
+    color: yellow;
+    font-size: 1.5rem;
+    background-color: hsla(200, 30%, 20%, 0.7);
+    z-index: 50;
+
+    /* location of #player-wrapper w/in #app */
+    grid-column-start: 2;
+    grid-column-end: span 3;
+    grid-row-start: 2;
+    grid-row-end: span 1;
+  }
+
+  /**************************************************
+   * Child-elems of controls
+   */
+
+  #list-size-options {
+    /* location of options w/in #controls */
+    grid-column-start: var(--options-col-start);
+    grid-column-end: var(--options-col-width);
+    grid-row-start: var(--options-row-start);
+    grid-row-end: var(--options-row-stack);
+
+    /* flex layout for children of #list-size-options */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: flex-start;
+    min-width: 10vw;
+    z-index: 5;
+  }
+
+  #chartSelects {
+    /* location of charts-selects w/in #controls */
+    grid-column-start: var(--charts-col-start);
+    grid-column-end: var(--charts-col-width);
+    grid-row-start: var(--charts-row-start);
+    grid-row-end: var(--charts-row-stack);
+
+    /* flex layout for children of #list-size-options */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: flex-start;
+    z-index: 5;
+  }
+
+  #player-wrapper {
+    /* location of #player-wrapper w/in #app */
+    grid-column-start: var(--player-col-start);
+    grid-column-end: var(--player-col-width);
+    grid-row-start: var(--player-row-start);
+    grid-row-end: var(--player-row-stack);
+
+    /* location of #player-wrapper w/in #app */
+    z-index: 25;
+  }
+
+  #player {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    transform: translateX(var(--slide-player-left));
+    transform: translateX(0);
+  }
+
+
+  /**************************************************
+   * Child-elems of chartSelects
+   */
+  #gfilter {
+    width: 100%;
+  }
+
+  .btn-glist {
+  }
+
+
+  /**************************************************
+   * Child-elems of chartSelects
+   */
+  .btn-playlist {
+    position: relative;
+    flex-grow: 1;
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 0;
+  }
+
+  .btn-playlist::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+  }
+
+  #settings {
+    order: 2;
+  }
+

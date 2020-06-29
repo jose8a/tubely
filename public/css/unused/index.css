@@ -1,0 +1,34 @@
+/* TODO: add normalize.css */
+
+/* mobile portrait styles */
+@import "mobile-portrait-layout.css";
+@import "mobile-portrait-skin.css";
+@import "mobile-portrait-spacing.css";
+
+/* mobile landscape styles */
+@import "mobile-wide-layout.css";
+@import "mobile-wide-skin.css";
+@import "mobile-wide-spacing.css";
+
+/* tablet portrait styles */
+@import "tablet-portrait-layout.css";
+@import "tablet-portrait-skin.css";
+@import "tablet-portrait-spacing.css";
+
+/* tablet landscape styles */
+@import "tablet-wide-layout.css";
+@import "tablet-wide-skin.css";
+@import "tablet-wide-spacing.css";
+
+/* laptop styles -- landscapes > 800px*/
+@import "laptop-layout.css";
+@import "laptop-skin.css";
+@import "laptop-spacing.css";
+
+/* desktop styles -- landscapes > 1200px*/
+@import "desktop-wide-layout.css";
+@import "desktop-wide-skin.css";
+@import "desktop-wide-spacing.css";
+
+/* all animation styles */
+@import "animations.css";

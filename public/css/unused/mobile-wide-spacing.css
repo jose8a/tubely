@@ -1,0 +1,43 @@
+/**************************************************
+ * spacing properties
+ */
+@media screen and (min-width: 450px) and (orientation: landscape){
+  body {
+    overflow: hidden;
+    padding-right: 1vw;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+  }
+
+  #player {
+    height: 90vh;
+    width: 80%;
+  }
+
+  #controls {
+    position: relative;
+    height: 90vh;
+  }
+
+  #list-size-options {
+    height: 100%;
+    width: 80%;
+  }
+
+  #numSongs-title {
+    width: 80%;
+  }
+
+  #chartSelects {
+    margin-top: 0;
+    height: 100%;
+    width: calc(19vw - 1px);
+  }
+
+  .btn-playlist {
+    height: 25%;
+    font-size: 1.2rem;
+  }
+}
+
+
