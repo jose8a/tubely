@@ -1,24 +1,28 @@
 <template>
   <div id="app">
-    <ul id="player-status">
-      <li id="active-list">
-        <i class="material-icons">play_arrow</i>
-        {{ chart }}
-      </li>
-      <li id="num-temp">
-        <i class="material-icons">playlist_play</i>
+    <div id="player-status">
+      <span id="num-temp" class="status-playing">
+        <span class="material-icons">
+          playlist_play
+        </span>
         {{ activePlaylistIndex }}/{{ playlistLength }}
-      </li>
-    </ul>
+      </span>
+      <span id="active-list" class="status-playing">
+        <span class="material-icons">
+          play_arrow
+        </span>
+        {{ chart }}
+      </span>
+    </div>
 
-    <div id="player-wrapper">
+    <div id="player-wrapper" class="player-slide-out">
       <div id="player" class=""></div>
     </div>
 
     <player-controls
       @chartSet="reloadPlaylist"
       @gListSet="loadGList"
-      :player-node="playerDomNode">
+    >
     </player-controls>
 
     <div id="screen-dims">{{ pageWidth }}W x {{ pageHeight }}H</div>
@@ -41,7 +45,6 @@ export default {
       activePlaylistIndex: 1,
       activePlaylistLength: null,
       playerRef: null,
-      playerDomNode: null,
       allSongs: null,
       chart: 'hot100',
       sizePlaylist: 25,
@@ -107,7 +110,6 @@ export default {
       //  it's DOM node, and also its JS Object to directly control
       //  it via the embedded iFrame player API
       this.playerRef = window.ytplayer;
-      this.playerDomNode = document.getElementById("player");
 
       // ==================================================
       // Converting touch events to mouse events for DRY handling
@@ -122,14 +124,6 @@ export default {
       this.playerRef.setVolume(15);
       this.playerRef.setPlaybackQuality('small');
       this.playerRef.playVideo();
-
-      // ==================================================
-      // slide-in player on reload -- player usually starts out in
-      //  the slide-out position
-      this.playerDomNode.classList.add("player-slide-in");
-      this.playerDomNode.classList.remove("player-slide-out");
-
-      console.log(`Player should be visible!`);
     },
     handleYTChanged: function(evt) {
       let stateChangeId = evt.detail.data;
@@ -290,20 +284,30 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   #player-status {
-    position: absolute;
-    top: -5.5rem;
-    left: 2rem;
     z-index: 100;
+    padding: 0.25rem 0.5rem;
+    margin-bottom: 0.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /*
+    border: 1px solid hsla(315, 10%, 90%, 0.8);
+    border-radius: 1.5rem;
+    */
   }
 
-  #player-status li {
-    color: rgba(255, 182, 16, 0.5);
-    border: var(--primary-color-light);
+  .status-playing {
+    color: hsla(15, 10%, 90%, 0.95);
+    color: var(--accent-color-med);
+    background-color: var(--primary-color-darker);
     font-size: 1.5rem;
-    list-style: none;
+    padding: 0.35rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  #player-status li i {
+  #player-status span span {
     padding-top: 0.1rem;
   }
 

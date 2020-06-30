@@ -9,7 +9,7 @@
  */
 
 .player-slide-in {
-  transform: translateX(var(--slide-player-down));
+  transform: translateY(0);
   transition-property: transform;
   transition-duration: 1s;
   transition-timing-function: ease-in-out;
@@ -17,20 +17,10 @@
 
 .player-slide-out {
   /* animation: 1s ease-out alternate slide-left; */
-  transform: translateX(var(--slide-player-up));
+  transform: translateY(var(--slide-player-up));
   transition-property: transform;
   transition-duration: 1s;
   transition-timing-function: ease-in-out;
-}
-
-@keyframes slide-left {
-  0% {
-    transform: none;
-  }
-
-  100% {
-    transform: translateX(var(--slide-player-up));
-  }
 }
 
 

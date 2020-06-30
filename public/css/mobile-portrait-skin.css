@@ -21,6 +21,7 @@
 
   #numSongs-title {
     font-size: 2.25rem;
+    background-color: var(--primary-color-dark);
   }
 
   p {
@@ -61,8 +62,4 @@
   p::before,*/
   .btn-playlist::before {
     background-color: var(--accent-color-dark);
-  }
-
-  #numSongs-title {
-    background-color: var(--primary-color-dark);
   }

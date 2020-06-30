@@ -28,7 +28,6 @@
         <button
           @click="toggleShowControls"
           data-type="set"
-          data-control-status="controlStatus"
           class="list-type"
         >&#9881;
         </button>
@@ -36,8 +35,8 @@
 
       <button
         v-for="(gl, index) in gLists"
-        type="submit"
         @click="gListSet"
+        type="submit"
         :id="gl.id"
         :class="'btn-glist ' + gl.type"
         :data-visible="gl.isActive"
@@ -57,13 +56,14 @@ import axios from 'axios';
 
 export default {
   name: 'PlayerControls',
-  props: {
-  },
+  props: [],
   data: function() {
     return {
       baseUrl: `http://localhost:3550`,
-      controlStatus: 'closed',
+      playerSLideStatus: 'open',
       playerDomNode: null,
+      playerWrapperDomNode: null,
+      playerSlideStatus: null,
       inputPlaylistSize: 0,
       radioPlaylistSize: 25,
       radioOpts: [
@@ -221,6 +221,16 @@ export default {
     handleYTReady: function() {
       this.playerRef = window.ytplayer;
       this.playerDomNode = document.getElementById("player");
+      this.playerWrapperDomNode = document.getElementById("player-wrapper");
+
+      // ==================================================
+      // slide-in player on reload -- player usually starts out in
+      //  the slide-out position
+      // --- this.playerWrapperDomNode.classList.add("player-slide-in");
+      this.playerWrapperDomNode.classList.remove("player-slide-out");
+      this.playerSlideStatus = "closed";
+
+      console.log(`Player should be visible!`);
     },
     gListSet: async function(evt) {
       evt.preventDefault();
@@ -256,28 +266,30 @@ export default {
       evt.preventDefault();
       evt.stopPropagation();
 
-      if (this.controlStatus === 'closed') {
+      if (this.playerSlideStatus === 'closed') {
         this.showControls(evt);
       } else {
         this.hideControls(evt);
       }
+
+      console.log(`Player slide-in-out toggled.`);
     },
     showControls: function(evt) {
       evt.preventDefault();
       evt.stopPropagation();
 
-      this.playerDomNode.classList.add("player-slide-out");
-      this.playerDomNode.classList.remove("player-slide-in");
-      this.controlStatus = 'open';
+      this.playerWrapperDomNode.classList.add("player-slide-out");
+      this.playerWrapperDomNode.classList.remove("player-slide-in");
+      this.playerSlideStatus = 'open';
       console.log('player-controls-show');
     },
     hideControls: function(evt) {
       evt.preventDefault();
       evt.stopPropagation();
 
-      this.playerDomNode.classList.add("player-slide-in");
-      this.playerDomNode.classList.remove("player-slide-out");
-      this.controlStatus = 'closed';
+      this.playerWrapperDomNode.classList.add("player-slide-in");
+      this.playerWrapperDomNode.classList.remove("player-slide-out");
+      this.playerSlideStatus = 'closed';
       console.log('player-controls-hide');
     },
   },
@@ -319,6 +331,8 @@ export default {
     width: 25%;
     padding: .25rem;
     margin-bottom: 0.25rem;
+    padding-top: .75rem;
+    padding-bottom: .75rem;
     margin: 0;
   }
 
@@ -329,6 +343,10 @@ export default {
     color: var(--primary-color-light);
     border: 1px solid var(--primary-color-light);
     background-color: var(--primary-color-darker);
+  }
+
+  .list-type {
+    background-color: var(--primary-alt-color-darker);
   }
 
   .list-type:hover,
@@ -362,23 +380,18 @@ export default {
     padding-top: .75rem;
     padding-bottom: .75rem;
     padding: .75rem .5rem;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    display: none;
   }
 
   .btn-glist::before {
     content: "";
     height: 100%;
     width: 100%;
-  }
-
-  .btn-glist {
-    text-overflow: ellipsis;
-
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  .btn-glist {
-    display: none;
   }
 
   [data-visible="show"] {

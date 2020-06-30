@@ -6,6 +6,7 @@
   /* default properties: mobile-layout*/
   :root {
     /* app theme colors */
+    --primary-alt-color-darker: hsla(270, 70%, 10%, 0.8);
     --primary-color-darker: hsla(200, 70%, 10%, 0.8);
     --primary-color-dark: hsla(200, 90%, 10%, 0.8);
     --primary-color-med: hsla(200, 40%, 50%, 0.8);
@@ -18,15 +19,15 @@
     --grey-color-med: hsla(200, 10%, 10%, 0.8);
 
     /* player animation variables */
-    --slide-player-up: -10vh;
-    --slide-player-down: 10vh;
+    --slide-player-up: -48vh;
+    --slide-player-down: 48vh;
 
 
     /* #player-status grid properties */
-    --status-col-start: 8;
-    --status-col-width: span 10;
-    --status-row-start: 3;
-    --status-row-stack: span 3;
+    --status-col-start: 6;
+    --status-col-width: span 3;
+    --status-row-start: 11;
+    --status-row-stack: span 1;
 
     /* #controls grid properties */
     --controls-col-start: 2;
@@ -55,9 +56,10 @@
     --player-col-start: 1;
     --player-col-width: span 8;
     --player-col-width: span 12;
-    --player-row-start: 3;
-    --player-row-stack: span 10;
+    --player-row-start: 1;
     --player-row-stack: span 9;
+    --player-row-stack: span 10;
+    --player-row-stack: span 11;
 
     /* ------------------------------ */
 
