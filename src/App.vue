@@ -1,25 +1,17 @@
 <template>
   <div id="app">
-    <div id="player-status">
-      <span id="num-temp" class="status-playing">
-        <span class="material-icons">
-          playlist_play
-        </span>
-        {{ activePlaylistIndex }}/{{ playlistLength }}
-      </span>
-      <span id="active-list" class="status-playing">
-        <span class="material-icons">
-          play_arrow
-        </span>
-        {{ chart }}
-      </span>
-    </div>
+    <playlist-status
+      :playlistName="playlistId"
+      :activeSongIndex="activePlaylistIndex"
+      :playlistSize="playlistLength"
+    ></playlist-status>
 
     <div id="player-wrapper" class="player-slide-out">
       <div id="player" class=""></div>
     </div>
 
     <player-controls
+      @update-size="updatePlaylistSize">
       @chartSet="reloadPlaylist"
       @gListSet="loadGList"
     >
@@ -32,22 +24,25 @@
 <script>
 /* eslint-disable no-console */
 import PlayerControls from './components/PlayerControls.vue'
+import PlaylistStatus from '@/components/PlaylistStatus.vue'
 import axios from 'axios';
 
 export default {
   name: 'app',
   components: {
-    PlayerControls
+    PlayerControls,
+    'playlist-status': PlaylistStatus,
   },
   data: function() {
     return {
-      baseUrl: `http://localhost:3550`,
+      // --- baseUrl: `http://localhost:3550`,
+      baseUrl: `https://tubester.azurewebsites.net`,
       activePlaylistIndex: 1,
       activePlaylistLength: null,
       playerRef: null,
       allSongs: null,
-      chart: 'hot100',
-      sizePlaylist: 25,
+      playlistId: 'hot100',
+      playlistSize: 25,
       activeGList: null,
       gListSongs: null,
       pageWidth: null,
@@ -62,6 +57,9 @@ export default {
     document.addEventListener('ytube-state-changed', this.handleYTChanged);
     document.addEventListener('ytube-error', this.handleYTError);
 
+    // listen for new-playlist event from the playlist-selector
+    document.addEventListener('new-playlist', this.handleNewPlaylist);
+
     this.pageWidth = window.innerWidth
     this.pageHeight = window.innerHeight
   },
@@ -69,20 +67,6 @@ export default {
     this.$nextTick(() => {
       window.addEventListener('resize', this.onResize);
     });
-
-    /*
-      //  create and emit a custom event here so that Vue app can catch it and react
-      //  accordingly:
-      //    -- allow bubbling
-      //    -- pass along data via the "details" property
-      const loadYTApi = new CustomEvent('yt-api-load', {
-        bubbles: true,
-        detail: { data: `api-load`, text: () => `YT Player API bootstrap.` }
-      });
-
-      document.dispatchEvent(loadYTApi);
-      console.log(`Create and dispatch 'yt-api-load' event`);
-    */
   },
   beforeDestroy: function() {
     window.removeEventListener('resize', this.onResize);
@@ -93,7 +77,7 @@ export default {
         return this.activePlaylistLength;
       }
 
-      return this.sizePlaylist;
+      return this.playlistSize;
     },
   },
   methods: {
@@ -175,41 +159,49 @@ export default {
         this.playerRef.nextVideo();
       }
     },
+    updatePlaylistSize: function(size) {
+      this.playlistSize = size;
+    },
+    handleNewPlaylist: function(evt) {
+      const playlistType = evt.detail.data.playlistType;
+      const data = evt.detail.data;
+
+      if (playlistType === 'chartSet') {
+        this.reloadPlaylist(data);
+      }
+
+      if (playlistType === 'gListSet') {
+        this.loadGList(data)
+      }
+    },
     loadGList: async function(data) {
       // get the user google-playlists available
-      const listId = data.chart;
+      const listId = data.playlistId;
       this.activeGList = listId;
-      this.sizePlaylist = data.size;
-      // --- this.chart = this.cleanListName(data.chart);
-      this.chart = data.chart;
+
+      // --- this.playlistId = this.cleanListName(data.playlistId);
+      this.playlistId = data.playlistId;
 
       console.log(`\n\nLIST-ID: ${listId}`);
       let songData = [];
       let response = null;
 
       try {
+        console.log(`DEBUG::AppBaseUrl: ${this.baseUrl}`);
         response = await axios.get(`${this.baseUrl}/glist/${listId}`);
         songData = [ ...response.data ];
       } catch(err) {
         console.log(`ERR: ${err}`);
       }
 
-      // ----- DEBUG:
-      // ----- for (let item of songData) {
-      // -----   console.log(`GSONG-ID: ${item}`);
-      // ----- }
-
       this.gListSongs = [ ...songData ];
-      // ----- DEBUG: console.log(`${listId} -- #${songData.length} songs received!\n\n`);
-
       const playlistSongIds = this.createRandSonglist(songData);
 
       this.allSongs = [ ...playlistSongIds ];
       this.playerRef.loadPlaylist( playlistSongIds );
     },
     reloadPlaylist: function(data) {
-      this.chart = data.chart;
-      this.sizePlaylist = data.size;
+      this.playlistId = data.playlistId;
       this.altLoadNewPlaylist();
     },
     createRandSonglist: function(songlist) {
@@ -220,14 +212,14 @@ export default {
 
       // make sure the playlist size is not larger than the number of
       // available songs
-      if (this.sizePlaylist > numSongs) {
-        this.sizePlaylist = numSongs;
+      if (this.playlistSize > numSongs) {
+        this.playlistSize = numSongs;
         // TODO: do not allow user to create playlist larger than numSongs
       }
 
       // create a unique Set of song IDs to create the playlist
       let songSet = new Set();
-      while (songSet.size < this.sizePlaylist) {
+      while (songSet.size < this.playlistSize) {
         // generate random number and insert into Set
         let randIndex = Math.floor(Math.random() * Math.floor(numSongs));
         let songId = remixedSongIds[randIndex];
@@ -236,17 +228,11 @@ export default {
       }
 
       for (let songId of songSet.values()) playlistSongIds.push(songId);
-
-      // ----- altLoad ENDS here ----------------------------------------
-      // ----- DEBUG:
-      // ----- console.log(playlistSongIds);
-      // ----- console.log(`LOADED data: ${playlistSongIds.length}`);
-
       return playlistSongIds;
     },
     // get and load a new set of songs to play
     altLoadNewPlaylist: async function() {
-      let response = await axios.get(`${this.baseUrl}/playlist/${this.chart}`);
+      let response = await axios.get(`${this.baseUrl}/playlist/${this.playlistId}`);
       let songIds = Object.keys(response.data.songs);
 
       const playlistSongIds = this.createRandSonglist(songIds);
@@ -283,32 +269,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  #player-status {
-    z-index: 100;
-    padding: 0.25rem 0.5rem;
-    margin-bottom: 0.25rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /*
-    border: 1px solid hsla(315, 10%, 90%, 0.8);
-    border-radius: 1.5rem;
-    */
-  }
-
-  .status-playing {
-    color: hsla(15, 10%, 90%, 0.95);
-    color: var(--accent-color-med);
-    background-color: var(--primary-color-darker);
-    font-size: 1.5rem;
-    padding: 0.35rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #player-status span span {
-    padding-top: 0.1rem;
-  }
-
 </style>

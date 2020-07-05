@@ -103,9 +103,12 @@
 
     /* flex layout for children of #list-size-options */
     display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /*
     flex-wrap: wrap;
-    justify-content: space-between;
     align-content: flex-start;
+    */
     z-index: 5;
   }
 
@@ -138,6 +141,14 @@
   .btn-glist {
   }
 
+  #gl-playlists {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: flex-start;
+    z-index: 5;
+  }
 
   /**************************************************
    * Child-elems of chartSelects
